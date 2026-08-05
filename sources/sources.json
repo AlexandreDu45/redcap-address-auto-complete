@@ -1,0 +1,52 @@
+{
+    "sources": [
+        {           
+            "identifier": "geo.admin.ch",
+            "description": "<i>geo.admin.ch</i> is the geographical information platform of the Swiss Confederation within the Federal Administration. The usage is free but throttled to a maximum amount of requests per time. It is possible though to obtain higher API priviliges by submitting an application.",
+            "documentation": "http://api3.geo.admin.ch/services/sdiservices.html#search",
+            "url": "api3.geo.admin.ch",
+            "endpoint": "/rest/services/api/SearchServer?type=locations&origins=address",
+            "limit": "limit",
+            "term": "searchText",
+            "token": "token"
+        },
+        {           
+            "identifier": "getaddress.io",
+            "description": "<i>getaddress.io</i> is a limited free-to-use, commercial API service for UK addresses. <br><b style='color:red'>API key is needed:</b> Please check API documentation for details and use API Registration to obtain a key.",
+            "documentation": "https://documentation.getaddress.io/",
+            "registration": "https://getaddress.io/Plan/Free",
+            "url": "api.getAddress.io",
+            "endpoint": "/autocomplete",
+            "secondary": true,
+            "limit": "top",
+            "term": "",
+            "token": "api-key"
+        },        
+        {
+            "identifier": "mrnf.gouv.qc.ca",
+            "description": "<i>Adresses Québec</i> is a geodatabase resulting from a government partnership and collaboration with municipalities. It was created using the expertise and government mission data of its partners.<br>For more information, visit <a href='https://mrnf.gouv.qc.ca/repertoire-geographique/adresses-quebec-aqgeobati/' target='_blank' rel='noopener noreferrer'>mrnf.gouv.qc.ca</a>.",
+            "documentation": "https://servicescarto.mrnf.gouv.qc.ca/pes/rest/services/Territoire/Adresse_Geocodage/GeocodeServer",
+            "url": "servicescarto.mrnf.gouv.qc.ca",
+            "endpoint": "/pes/rest/services/Territoire/Adresse_Geocodage/GeocodeServer/suggest?f=pjson",
+            "secondary": true,
+            "limit": "maxSuggestions",
+            "term": "text"
+        },
+        {           
+            "identifier": "services.api.esdc-edsc.canada.ca",
+            "description": "The National Occupational Classification (NOC) is Canada’s national system for describing occupations.You can search the NOC to find where an occupation is classified or to learn about its main duties, educational requirements or other useful information.",
+            "documentation": "https://noc.esdc.gc.ca/?GoCTemplateCulture=en-CA",
+            "registration": "https://noc.esdc.gc.ca/Home/ContactUs",
+            "url": "services.api.esdc-edsc.canada.ca/prd/stream1/lmi/noc/v1/v1.0/",
+            "endpoint": "/jobsearch?LanguageName.LanguageName=fr",
+            "secondary": false,
+            "limit": "",
+            "term": "OccupationCategoryText",
+            "token": "Ocp-Apim-Subscription-Key"
+        },        
+        {
+            "identifier": "your.api.here",
+            "description": "If you would like to add your own API please make a Pull Request via Github. More information can be found in the docs."
+        }
+    ]
+}
