@@ -8,14 +8,50 @@ if ($_REQUEST['action'] == 'mapResults') {
         header("HTTP/1.1 400 Bad Request");
         die("results or source missing!");
     }
-
     $source = htmlentities($_POST["source"], ENT_QUOTES);
     $results = json_decode($_POST["results"]);
+
     if (!is_array($results)) {
         $results = [$results];
     }
-    
-    
+
+    if ($source === "services.api.esdc-edsc.canada.ca") {
+
+        $flattened = [];
+
+        foreach ($results as $occupation) {
+
+            $code = $occupation->occupationCategoryCode->occupationCategoryCode;
+
+            $occupationText = '';
+
+            foreach ($occupation->occupationCategoryText as $text) {
+                if ($text->lang === 'fr') {
+                    $occupationText = $text->value;
+                    break;
+                }
+            }
+
+            foreach ($occupation->occupationCategoryTitleList as $titleList) {
+
+                foreach ($titleList->occupationCategoryTitle as $title) {
+
+                    if ($title->occupationCategoryTitleText->lang !== 'fr') {
+                        continue;
+                    }
+
+                    $flattened[] = (object) [
+                        'occupationCategoryCode' => $code,
+                        'occupationCategoryText' => $occupationText,
+                        'occupationTitle' => $title->occupationCategoryTitleText->value
+                    ];
+                }
+            }
+        }
+
+        $results = $flattened;
+    }
+
     $module->mapResults($source, $results);
 }
 
