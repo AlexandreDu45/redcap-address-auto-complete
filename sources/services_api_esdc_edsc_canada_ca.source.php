@@ -9,13 +9,7 @@ class services_api_esdc_edsc_canada_ca extends source {
 {
     $occupation = new Address;
 
-    $occupation->value =
-        $value->occupationCategoryText .
-        " - " .
-        $value->occupationTitle .
-        " (" .
-        $value->occupationCategoryCode .
-        ")";
+    $occupation->value = $value->occupationTitle;;
 
     $occupation->label = $value->occupationTitle;
 
