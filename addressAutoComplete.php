@@ -297,11 +297,7 @@ class addressAutoComplete extends \ExternalModules\AbstractExternalModule
                     "advanced_fields"   => array(
                         "street"    => $instruction_raw["field-street"],
                         "number"    => $instruction_raw["field-number"],
-                        "apt"       => $instruction_raw["field-apt"],
-                        "code"      => $instruction_raw["field-code"],
-                        "city"      => $instruction_raw["field-city"],
-                        "country"   => $instruction_raw["field-country"],
-                        "note"      => $instruction_raw["field-note"]
+                        "langue" => $instruction_raw["field-langue"],
                     ),
                     "timestamp_field" => $instruction_raw["timestamp"]
                 );

@@ -175,7 +175,8 @@ STPH_addressAutoComplete.init = function() {
         //  Set Source from external REST API
         source: function(request, response) {
 
-          var lang = $('input[name="lang___radio"]:checked').val();
+          //var lang = $('input[name="lang___radio"]:checked').val();
+          var lang = $('input[name="' + iid.a.langue + '___radio"]:checked').val();
 
           $.ajax({
             dataType: "json",

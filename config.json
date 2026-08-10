@@ -132,7 +132,7 @@
                 },
                 {
                     "key": "field-street",
-                    "name": "<i>Street</i>",
+                    "name": "<i>Groupe métier</i>",
                     "type": "field-list",
                     "required": true,
                     "branchingLogic": {
@@ -143,7 +143,7 @@
                 },
                 {
                     "key": "field-number",
-                    "name": "<i>Number</i>",
+                    "name": "<i>Code groupe métier</i>",
                     "type": "field-list",
                     "required": true,
                     "branchingLogic": {
@@ -153,59 +153,10 @@
                     }
                 },
                 {
-                    "key": "field-apt",
-                    "name": "<i>Apartment Number</i>",
+                    "key": "field-langue",
+                    "name": "<i>Langue de la recherche</i>",
                     "type": "field-list",
-                    "required": true,
-                    "branchingLogic": {
-                        "field": "enable-advanced-save",
-                        "op": "=",
-                        "value": 1
-                    }
-                },
-                {
-                    "key": "field-code",
-                    "name": "<i>Post Code</i>",
-                    "type": "field-list",
-                    "required": true,
-                    "branchingLogic": {
-                        "field": "enable-advanced-save",
-                        "op": "=",
-                        "value": 1
-                    }
-                },
-                {
-                    "key": "field-city",
-                    "name": "<i>City</i>",
-                    "type": "field-list",
-                    "required": true,
-                    "branchingLogic": {
-                        "field": "enable-advanced-save",
-                        "op": "=",
-                        "value": 1
-                    }
-                },
-                {
-                    "key": "field-country",
-                    "name": "<i>Country</i>",
-                    "type": "field-list",
-                    "required": false,
-                    "branchingLogic": {
-                        "field": "enable-advanced-save",
-                        "op": "=",
-                        "value": 1
-                    }
-                },
-                {
-                    "key": "field-note",
-                    "name": "<i>Note(s)</i>",
-                    "type": "field-list",
-                    "required": false,
-                    "branchingLogic": {
-                        "field": "enable-advanced-save",
-                        "op": "=",
-                        "value": 1
-                    }
+                    "required": true
                 },        
                 {
                     "key": "target-meta",
