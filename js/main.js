@@ -175,12 +175,22 @@ STPH_addressAutoComplete.init = function() {
         //  Set Source from external REST API
         source: function(request, response) {
 
+          var lang = $('input[name="lang___radio"]:checked').val();
+
+          console.log("hidden lang =", $('input[name="lang"]').val());
+
+          console.log(
+              "radio lang =",
+              $('input[name="lang___radio"]:checked').val()
+          );
+
           $.ajax({
             dataType: "json",
             type: "POST",
             url: help.url_request_handler + "&action=nocSearch",
             data: {
                 term: request.term,
+                lang: lang,
                 redcap_csrf_token: help.csrf_token
             },
 

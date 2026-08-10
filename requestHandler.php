@@ -15,43 +15,6 @@ if ($_REQUEST['action'] == 'mapResults') {
         $results = [$results];
     }
 
-    if ($source === "services.api.esdc-edsc.canada.ca") {
-
-        $flattened = [];
-
-        foreach ($results as $occupation) {
-
-            $code = $occupation->occupationCategoryCode->occupationCategoryCode;
-
-            $occupationText = '';
-
-            foreach ($occupation->occupationCategoryText as $text) {
-                if ($text->lang === 'fr') {
-                    $occupationText = $text->value;
-                    break;
-                }
-            }
-
-            foreach ($occupation->occupationCategoryTitleList as $titleList) {
-
-                foreach ($titleList->occupationCategoryTitle as $title) {
-
-                    if ($title->occupationCategoryTitleText->lang !== 'fr') {
-                        continue;
-                    }
-
-                    $flattened[] = (object) [
-                        'occupationCategoryCode' => $code,
-                        'occupationCategoryText' => $occupationText,
-                        'occupationTitle' => $title->occupationCategoryTitleText->value
-                    ];
-                }
-            }
-        }
-
-        $results = $flattened;
-    }
-
     $module->mapResults($source, $results);
 }
 
@@ -76,14 +39,29 @@ else if ($_REQUEST['action'] == 'nocSearch') {
         die("term missing");
     }
 
+    
+    if (empty($_POST["lang"])) {
+        $lang = 'fr';
+    } else {
+        $lang = $_POST["lang"];
+    }
+
+    if ($lang === 'en-US') {
+        $lang = 'en';
+    }
+
     $term = urlencode($_POST["term"]);
+
 
     $apiKey = $module->getProjectSetting("api-key");
 
     $url =
         "https://services.api.esdc-edsc.canada.ca/prd/stream1/lmi/noc/v1/v1.0/jobsearch" .
-        "?LanguageName.LanguageName=fr" .
+        "?LanguageName.LanguageName=" . $lang .
         "&OccupationCategoryText=" . $term;
+    
+    error_log("LANG = " . $lang);
+    error_log("URL = " . $url);
 
     $opts = [
         'http' => [
@@ -101,9 +79,43 @@ else if ($_REQUEST['action'] == 'nocSearch') {
         $context
     );
 
+    $data = json_decode($response);
+
+    $flattened = [];
+
+    foreach ($data as $occupation) {
+
+        $code = $occupation->occupationCategoryCode->occupationCategoryCode;
+
+        $occupationText = '';
+
+        foreach ($occupation->occupationCategoryText as $text) {
+            if ($text->lang === $lang) {
+                $occupationText = $text->value;
+                break;
+            }
+        }
+
+        foreach ($occupation->occupationCategoryTitleList as $titleList) {
+
+            foreach ($titleList->occupationCategoryTitle as $title) {
+
+                if ($title->occupationCategoryTitleText->lang !== $lang) {
+                    continue;
+                }
+
+                $flattened[] = (object) [
+                    'occupationCategoryCode' => $code,
+                    'occupationCategoryText' => $occupationText,
+                    'occupationTitle' => $title->occupationCategoryTitleText->value
+                ];
+            }
+        }
+    }
+
     header('Content-Type: application/json');
 
-    echo $response;
+    echo json_encode($flattened);
     exit;
 }
 
