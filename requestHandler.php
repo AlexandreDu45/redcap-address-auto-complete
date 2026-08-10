@@ -60,8 +60,6 @@ else if ($_REQUEST['action'] == 'nocSearch') {
         "?LanguageName.LanguageName=" . $lang .
         "&OccupationCategoryText=" . $term;
     
-    error_log("LANG = " . $lang);
-    error_log("URL = " . $url);
 
     $opts = [
         'http' => [

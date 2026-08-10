@@ -177,13 +177,6 @@ STPH_addressAutoComplete.init = function() {
 
           var lang = $('input[name="lang___radio"]:checked').val();
 
-          console.log("hidden lang =", $('input[name="lang"]').val());
-
-          console.log(
-              "radio lang =",
-              $('input[name="lang___radio"]:checked').val()
-          );
-
           $.ajax({
             dataType: "json",
             type: "POST",
