@@ -236,6 +236,7 @@ class addressAutoComplete extends \ExternalModules\AbstractExternalModule
                 $this->instructions[0]["advanced_fields"] = array(
                     "street" => $this->getProjectSetting("field-street"),
                     "number" => $this->getProjectSetting("field-number"),
+                    "word" => $this->getProjectSetting("field-word"),
                     "apt" => $this->getProjectSetting("field-apt"),
                     "code" => $this->getProjectSetting("field-code"),
                     "city" => $this->getProjectSetting("field-city"),
@@ -297,6 +298,7 @@ class addressAutoComplete extends \ExternalModules\AbstractExternalModule
                     "advanced_fields"   => array(
                         "street"    => $instruction_raw["field-street"],
                         "number"    => $instruction_raw["field-number"],
+                        "keyword"    => $instruction_raw["field-keyword"],
                         "langue" => $instruction_raw["field-langue"],
                     ),
                     "timestamp_field" => $instruction_raw["timestamp"]

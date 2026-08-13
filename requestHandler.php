@@ -105,7 +105,8 @@ else if ($_REQUEST['action'] == 'nocSearch') {
                 $flattened[] = (object) [
                     'occupationCategoryCode' => $code,
                     'occupationCategoryText' => $occupationText,
-                    'occupationTitle' => $title->occupationCategoryTitleText->value
+                    'occupationTitle' => $title->occupationCategoryTitleText->value,
+                    'searchTerm' => $_POST["term"]
                 ];
             }
         }

@@ -274,7 +274,7 @@ STPH_addressAutoComplete.init = function() {
 
               //  If advanced save is enabled save parts as well
               if(STPH_addressAutoComplete.configuration.options.enable_advanced_save) {
-                var as_data = { street: ui_s.street, number:  ui_s.number, apt: ui_s.apt, code: ui_s.code, city: ui_s.city, country: ui_s.country, note: ""};
+                var as_data = { street: ui_s.street, number:  ui_s.number, apt: ui_s.apt, code: ui_s.code, city: ui_s.city, country: ui_s.country, note: "", keyword: target_aac.val()};
                 STPH_addressAutoComplete.handleAdvancedSave(as_data, iid.a);
               }
 
@@ -288,7 +288,7 @@ STPH_addressAutoComplete.init = function() {
 
             //  If advanced save is enabled save parts as well
             if(STPH_addressAutoComplete.configuration.options.enable_advanced_save) {
-              var as_data = { street: ui.item.parts.street, number:  ui.item.parts.number, apt: ui.item.parts.apt, code: ui.item.parts.code, city: ui.item.parts.city, country: ui.item.parts.country, note: ""};
+              var as_data = { street: ui.item.parts.street, number:  ui.item.parts.number, apt: ui.item.parts.apt, code: ui.item.parts.code, city: ui.item.parts.city, country: ui.item.parts.country, note: "", keyword: ui.item.parts.keyword};
               STPH_addressAutoComplete.handleAdvancedSave(as_data, iid.a);
             }
             
@@ -412,7 +412,7 @@ STPH_addressAutoComplete.resetFields = function(iid) {
   }
 
   if(STPH_addressAutoComplete.configuration.options.enable_advanced_save) {
-    var as_data = { street: "", number:  "", apt: "", code: "", city: "", country: "", note: ""};
+    var as_data = { street: "", number:  "", apt: "", code: "", city: "", country: "", note: "", keyword: ""};
     STPH_addressAutoComplete.handleAdvancedSave(as_data, iid.a);
   }
 
@@ -427,6 +427,7 @@ STPH_addressAutoComplete.handleAdvancedSave = function(data, advanced_fields) {
   //  Define targets
   var save_street = $('#'+advanced_fields.street+'-tr').find('input');
   var save_number = $('#'+advanced_fields.number+'-tr').find('input');
+  var save_keyword = $('#'+advanced_fields.keyword+'-tr').find('input');
   var save_apt = $('#'+advanced_fields.apt+'-tr').find('input');
   var save_code = $('#'+advanced_fields.code+'-tr').find('input');
   var save_city = $('#'+advanced_fields.city+'-tr').find('input');
@@ -435,6 +436,7 @@ STPH_addressAutoComplete.handleAdvancedSave = function(data, advanced_fields) {
 
   save_street.val(data.street);
   save_number.val(data.number);
+  save_keyword.val(data.keyword);
   save_apt.val(data.apt);
   save_code.val(data.code);
   save_city.val(data.city);

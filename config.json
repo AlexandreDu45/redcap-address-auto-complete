@@ -153,6 +153,17 @@
                     }
                 },
                 {
+                    "key": "field-keyword",
+                    "name": "<i>Mot clef de la recherche</i>",
+                    "type": "field-list",
+                    "required": true,
+                    "branchingLogic": {
+                        "field": "enable-advanced-save",
+                        "op": "=",
+                        "value": 1
+                    }
+                },
+                {
                     "key": "field-langue",
                     "name": "<i>Langue de la recherche</i>",
                     "type": "field-list",

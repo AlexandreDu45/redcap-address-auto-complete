@@ -9,4 +9,5 @@ class parts {
     public $code;
     public $city;
     public $country;
+    public $keyword;
 }
