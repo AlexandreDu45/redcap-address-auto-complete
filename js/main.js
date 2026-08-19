@@ -1,6 +1,6 @@
 /**
- * Address Auto Complete - a REDCap External Module
- * Author: Ekin Tertemiz
+ * Job Auto Complete - a REDCap External Module
+ * Author: Alexandre Aubry from Address auto complete of Ekin Tertemiz
 */
 
 var STPH_addressAutoComplete = STPH_addressAutoComplete || {};
