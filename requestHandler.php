@@ -3,7 +3,6 @@
 
 if ($_REQUEST['action'] == 'mapResults') {
 
-
     if(empty($_POST["source"]) || empty($_POST["results"])) {
         header("HTTP/1.1 400 Bad Request");
         die("results or source missing!");

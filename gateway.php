@@ -3,6 +3,95 @@
 
 use \ExternalModules\ExternalModules;
 
+if (
+    isset($_REQUEST['action']) &&
+    $_REQUEST['action'] === 'nocSearch'
+) {
+
+    if (empty($_POST["term"])) {
+        header("HTTP/1.1 400 Bad Request");
+        die("term missing");
+    }
+
+    
+    if (empty($_POST["lang"])) {
+        $lang = 'fr';
+    } else {
+        $lang = $_POST["lang"];
+    }
+
+    if ($lang === 'en-US') {
+        $lang = 'en';
+    }
+
+    $term = urlencode($_POST["term"]);
+
+
+    $apiKey = $module->getProjectSetting("api-key");
+
+    $url =
+        "https://services.api.esdc-edsc.canada.ca/prd/stream1/lmi/noc/v1/v1.0/jobsearch" .
+        "?LanguageName.LanguageName=" . $lang .
+        "&OccupationCategoryText=" . $term;
+    
+
+    $opts = [
+        'http' => [
+            'method' => 'GET',
+            'header' =>
+                "Ocp-Apim-Subscription-Key: " . $apiKey . "\r\n"
+        ]
+    ];
+
+    $context = stream_context_create($opts);
+
+    $response = file_get_contents(
+        $url,
+        false,
+        $context
+    );
+
+    $data = json_decode($response);
+
+    $flattened = [];
+
+    foreach ($data as $occupation) {
+
+        $code = $occupation->occupationCategoryCode->occupationCategoryCode;
+
+        $occupationText = '';
+
+        foreach ($occupation->occupationCategoryText as $text) {
+            if ($text->lang === $lang) {
+                $occupationText = $text->value;
+                break;
+            }
+        }
+
+        foreach ($occupation->occupationCategoryTitleList as $titleList) {
+
+            foreach ($titleList->occupationCategoryTitle as $title) {
+
+                if ($title->occupationCategoryTitleText->lang !== $lang) {
+                    continue;
+                }
+
+                $flattened[] = (object) [
+                    'occupationCategoryCode' => $code,
+                    'occupationCategoryText' => $occupationText,
+                    'occupationTitle' => $title->occupationCategoryTitleText->value,
+                    'searchTerm' => $_POST["term"]
+                ];
+            }
+        }
+    }
+
+    header('Content-Type: application/json');
+
+    echo json_encode($flattened);
+    exit;
+}
+
 //  Validate Request Method
 $request_method = $_SERVER['REQUEST_METHOD'];
 if( $request_method !== "POST") {
