@@ -179,8 +179,6 @@ STPH_addressAutoComplete.init = function() {
           var lang = $('input[name="' + iid.a.langue + '___radio"]:checked').val();
 
           console.log("IS SURVEY =", help.is_survey_page);
-          console.log("REQUEST HANDLER =", help.url_request_handler);
-          console.log("GATEWAY =", help.url_gateway);
 
           var nocBackend = help.url_request_handler;
 
@@ -188,7 +186,6 @@ STPH_addressAutoComplete.init = function() {
             nocBackend = help.url_gateway;
           }   
 
-          console.log("NOC BACKEND =", nocBackend);
 
           $.ajax({
             dataType: "json",
@@ -219,10 +216,6 @@ STPH_addressAutoComplete.init = function() {
               })
               .done(function(mappedData){
                 STPH_addressAutoComplete.log("Data has been mapped.")
-                console.log("mappedData =", mappedData);
-                console.log("typeof =", typeof mappedData);
-                console.log("isArray =", Array.isArray(mappedData));
-                console.log("length =", mappedData.length);
                 response(mappedData)
               })
               .fail(function(err){
